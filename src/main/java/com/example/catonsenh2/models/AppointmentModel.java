@@ -13,11 +13,10 @@ import java.util.Date;
 @Table(name = "Appointment")
 @Data
 @NoArgsConstructor
-@JsonIdentityInfo(scope = AppointmentModel.class,generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class AppointmentModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
     private long id;
 
@@ -30,6 +29,4 @@ public class AppointmentModel implements Serializable {
     @Column(name = "Date",nullable = false)
     private Date date;
 
-    @OneToOne(mappedBy = "appointment",cascade = CascadeType.ALL)
-    private UserModel user;
 }

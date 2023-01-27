@@ -12,11 +12,10 @@ import java.io.Serializable;
 @Table(name = "Customer")
 @Data
 @NoArgsConstructor
-@JsonIdentityInfo(scope = UserModel.class,generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
-public class UserModel implements Serializable {
+public class UserModel implements Serializable { 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
     private Long id;
 
@@ -27,10 +26,5 @@ public class UserModel implements Serializable {
     private String tel;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "IdentityAppointment",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "appointment_id")
-    )
     private AppointmentModel appointment;
 }
