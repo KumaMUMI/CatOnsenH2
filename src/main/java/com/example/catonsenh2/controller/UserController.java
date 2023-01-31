@@ -47,4 +47,7 @@ public class UserController {
         this.userService.deleteByID(id);
         return new ResponseEntity<>(String.format("%d has deleted.",id),HttpStatus.OK);
     }
+
+
+
 }
