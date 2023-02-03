@@ -34,6 +34,7 @@ public class UserService {
         return userRepository.findById(id).map(user -> {
             user.setEmail(newUser.getEmail());
             user.setTel(newUser.getTel());
+            user.setName(newUser.getName());
            user.setAppointment(newUser.getAppointment());
             return userRepository.save(user);
         });

@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Table(name = "Customer")
 @Data
 @NoArgsConstructor
+@JsonIdentityInfo(scope = UserModel.class,generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class UserModel implements Serializable {
 
     @Id
@@ -25,6 +26,13 @@ public class UserModel implements Serializable {
     @Column(name = "Tel",length = 10,nullable = false)
     private String tel;
 
+    @Column(name = "Name",nullable = false)
+    private String name;
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "IdentityAppoint",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "appoint_id")
+    )
     private AppointmentModel appointment;
 }

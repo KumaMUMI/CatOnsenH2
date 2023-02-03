@@ -8,11 +8,13 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Appointment")
 @Data
 @NoArgsConstructor
+@JsonIdentityInfo(scope = AppointmentModel.class,generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class AppointmentModel implements Serializable {
 
     @Id
@@ -29,4 +31,6 @@ public class AppointmentModel implements Serializable {
     @Column(name = "Date",nullable = false)
     private Date date;
 
+    @OneToOne(mappedBy = "appointment",cascade = CascadeType.ALL)
+    private UserModel user;
 }

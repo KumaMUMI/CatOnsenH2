@@ -5,6 +5,9 @@ import com.example.catonsenh2.repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +27,12 @@ public class AppointmentService {
 
     public Optional<AppointmentModel> findAppointmentByID(Long id){
         return this.appointmentRepository.findById(id);
+    }
+
+    public List<AppointmentModel> findByDate(Date date){
+        List<AppointmentModel> appointDate = appointmentRepository.findAppointmentByDate(date);
+
+        return appointDate;
     }
 
     public AppointmentModel saveAppointment(AppointmentModel appointment){

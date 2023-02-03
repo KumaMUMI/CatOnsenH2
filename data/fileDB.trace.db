@@ -348,3 +348,12 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+2023-01-31 08:59:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]EMAIL"; expected "EXPLAIN, EXECUTE"; SQL statement:
+EMAIL [42001-214]
+2023-01-31 08:59:44 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]ID CUSTOMER"; expected "INSERT"; SQL statement:
+ID CUSTOMER [42001-214]
+2023-01-31 09:00:46 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]APPOINTMENT"; expected "ALTER, ANALYZE"; SQL statement:
+APPOINTMENT [42001-214]
