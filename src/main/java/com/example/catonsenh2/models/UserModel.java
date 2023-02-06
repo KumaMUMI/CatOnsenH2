@@ -30,9 +30,17 @@ public class UserModel implements Serializable {
     private String name;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "IdentityAppoint",
+            name = "IdentityOnsenAppoint",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "appoint_id")
+            inverseJoinColumns = @JoinColumn(name = "onsen_id")
     )
-    private AppointmentModel appointment;
+    private OnsenAppointModel onsenAppoint;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "IdentityMassageAppoint",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "massage_id")
+    )
+    private MassageAppointModel massageAppoint;
 }

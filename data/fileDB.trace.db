@@ -357,3 +357,15 @@ ID CUSTOMER [42001-214]
 2023-01-31 09:00:46 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]APPOINTMENT"; expected "ALTER, ANALYZE"; SQL statement:
 APPOINTMENT [42001-214]
+2023-02-07 03:51:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "drop table if exists [*]user cascade "; expected "identifier"; SQL statement:
+drop table if exists user cascade  [42001-214]
+2023-02-07 03:51:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id bigint, onsen_id bigint not null, primary key (onsen_id))"; expected "identifier"; SQL statement:
+create table user (user_id bigint, onsen_id bigint not null, primary key (onsen_id)) [42001-214]
+2023-02-07 03:51:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists [*]user add constraint FKmb2l76vrx06a9cil8nf7il80h foreign key (user_id) references customer"; expected "identifier"; SQL statement:
+alter table if exists user add constraint FKmb2l76vrx06a9cil8nf7il80h foreign key (user_id) references customer [42001-214]
+2023-02-07 03:51:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists [*]user add constraint FKd71kjjjphlto108i1apnwi5io foreign key (onsen_id) references onsen_appointment"; expected "identifier"; SQL statement:
+alter table if exists user add constraint FKd71kjjjphlto108i1apnwi5io foreign key (onsen_id) references onsen_appointment [42001-214]

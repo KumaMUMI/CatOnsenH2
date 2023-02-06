@@ -32,6 +32,21 @@ public class UserController {
         return new ResponseEntity<>(this.userService.findUserByID(id),HttpStatus.OK);
     }
 
+    @GetMapping("/name/{name}")
+    public @ResponseBody ResponseEntity<List<UserModel>> getUserByName(@PathVariable String name){
+        return new ResponseEntity<>(this.userService.findUserByName(name),HttpStatus.OK);
+    }
+
+    @GetMapping("/tel/{tel}")
+    public @ResponseBody ResponseEntity<List<UserModel>> getUserByTel(@PathVariable String tel){
+        return new ResponseEntity<>(this.userService.findUserByTel(tel),HttpStatus.OK);
+    }
+
+    @GetMapping("/email/{email}")
+    public @ResponseBody ResponseEntity<List<UserModel>> getUserByEmail(@PathVariable String email){
+        return new ResponseEntity<>(this.userService.findUserByEmail(email),HttpStatus.OK);
+    }
+
     @PostMapping("")
     public @ResponseBody ResponseEntity<UserModel> postUser(@RequestBody UserModel user){
         return new ResponseEntity<>(this.userService.saveUser(user),HttpStatus.CREATED);

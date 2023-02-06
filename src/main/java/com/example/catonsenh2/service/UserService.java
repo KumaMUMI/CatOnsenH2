@@ -26,6 +26,21 @@ public class UserService {
         return this.userRepository.findById(id);
     }
 
+    public List<UserModel> findUserByName(String name){
+        List<UserModel> userList = userRepository.findByName(name);
+        return userList;
+    }
+
+    public List<UserModel> findUserByTel(String tel){
+        List<UserModel> userList = userRepository.findByTel(tel);
+        return userList;
+    }
+
+    public List<UserModel> findUserByEmail(String email){
+        List<UserModel> userList = userRepository.findByEmail(email);
+        return userList;
+    }
+
     public UserModel saveUser(UserModel user){
         return this.userRepository.save(user);
     }
@@ -35,7 +50,8 @@ public class UserService {
             user.setEmail(newUser.getEmail());
             user.setTel(newUser.getTel());
             user.setName(newUser.getName());
-           user.setAppointment(newUser.getAppointment());
+            user.setOnsenAppoint(newUser.getOnsenAppoint());
+            user.setMassageAppoint(newUser.getMassageAppoint());
             return userRepository.save(user);
         });
     }
