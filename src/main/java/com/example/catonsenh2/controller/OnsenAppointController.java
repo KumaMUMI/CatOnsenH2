@@ -40,4 +40,10 @@ public class OnsenAppointController {
     public @ResponseBody ResponseEntity<OnsenAppointModel> postOnsenAppoint(@RequestBody OnsenAppointModel onsenAppoint){
         return new ResponseEntity<>(this.onsenAppointService.saveOnsenAppoint(onsenAppoint),HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public @ResponseBody ResponseEntity<String> deleteUser(@PathVariable Long id){
+        this.onsenAppointService.deleteByID(id);
+        return new ResponseEntity<>(String.format("%d has deleted.",id),HttpStatus.OK);
+    }
 }

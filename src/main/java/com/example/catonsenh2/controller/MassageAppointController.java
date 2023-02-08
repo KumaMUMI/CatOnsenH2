@@ -38,4 +38,10 @@ public class MassageAppointController {
     public @ResponseBody ResponseEntity<MassageAppointModel> postMassageAppoint(@RequestBody MassageAppointModel massageAppoint){
         return new ResponseEntity<>(this.massageAppointService.saveMassageAppoint(massageAppoint),HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public @ResponseBody ResponseEntity<String> deleteUser(@PathVariable Long id){
+        this.massageAppointService.deleteByID(id);
+        return new ResponseEntity<>(String.format("%d has deleted.",id),HttpStatus.OK);
+    }
 }
