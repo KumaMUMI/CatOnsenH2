@@ -28,4 +28,14 @@ public class MassageAppointController {
         Date date = Date.from(iDate);
         return new ResponseEntity<>(this.massageAppointService.findByDate(date), HttpStatus.OK);
     }
+
+    @GetMapping("")
+    public @ResponseBody ResponseEntity<List<MassageAppointModel>> getAllMassageAppoint(){
+        return new ResponseEntity<>(this.massageAppointService.findAllMassageAppoint(),HttpStatus.OK);
+    }
+
+    @PostMapping("")
+    public @ResponseBody ResponseEntity<MassageAppointModel> postMassageAppoint(@RequestBody MassageAppointModel massageAppoint){
+        return new ResponseEntity<>(this.massageAppointService.saveMassageAppoint(massageAppoint),HttpStatus.CREATED);
+    }
 }

@@ -28,19 +28,9 @@ public class UserModel implements Serializable {
 
     @Column(name = "Name",nullable = false)
     private String name;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "IdentityOnsenAppoint",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "onsen_id")
-    )
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private OnsenAppointModel onsenAppoint;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "IdentityMassageAppoint",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "massage_id")
-    )
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private MassageAppointModel massageAppoint;
 }

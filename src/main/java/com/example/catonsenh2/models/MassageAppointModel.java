@@ -29,6 +29,11 @@ public class MassageAppointModel implements Serializable {
     @Column(name = "Date",nullable = false)
     private Date date;
 
-    @OneToOne(mappedBy = "massageAppoint",cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "UserMassage",
+            joinColumns = @JoinColumn(name = "massage_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private UserModel user;
 }

@@ -31,5 +31,13 @@ public class OnsenAppointController {
         return new ResponseEntity<>(this.onsenAppointService.findByDate(date), HttpStatus.OK);
     }
 
+    @GetMapping("")
+    public @ResponseBody ResponseEntity<List<OnsenAppointModel>> getAllOnsenAppoint(){
+        return new ResponseEntity<>(this.onsenAppointService.findAllOnsenAppoint(),HttpStatus.OK);
+    }
 
+    @PostMapping("")
+    public @ResponseBody ResponseEntity<OnsenAppointModel> postOnsenAppoint(@RequestBody OnsenAppointModel onsenAppoint){
+        return new ResponseEntity<>(this.onsenAppointService.saveOnsenAppoint(onsenAppoint),HttpStatus.CREATED);
+    }
 }

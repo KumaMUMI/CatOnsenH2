@@ -30,6 +30,11 @@ public class OnsenAppointModel implements Serializable {
     @Column(name = "Date",nullable = false)
     private Date date;
 
-    @OneToOne(mappedBy = "onsenAppoint",cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "UserOnsen",
+            joinColumns = @JoinColumn(name = "onsen_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private UserModel user;
 }
