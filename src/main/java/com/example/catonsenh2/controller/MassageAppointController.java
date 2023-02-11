@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/massage")
@@ -22,7 +23,7 @@ public class MassageAppointController {
     public MassageAppointController(MassageAppointService massageAppointService) {
         this.massageAppointService = massageAppointService;
     }
-    @GetMapping("/{sDate}")
+    @GetMapping("/date/{sDate}")
     public @ResponseBody ResponseEntity<List<MassageAppointModel>> getMassageAppointNyDate(@PathVariable String sDate){
         Instant iDate = Instant.parse(sDate);
         Date date = Date.from(iDate);
@@ -34,9 +35,19 @@ public class MassageAppointController {
         return new ResponseEntity<>(this.massageAppointService.findAllMassageAppoint(),HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public @ResponseBody ResponseEntity<Optional<MassageAppointModel>> getOneMassageAppoint(@PathVariable Long id){
+        return new ResponseEntity<>(this.massageAppointService.findMassageAppointByID(id),HttpStatus.OK);
+    }
+
     @PostMapping("")
     public @ResponseBody ResponseEntity<MassageAppointModel> postMassageAppoint(@RequestBody MassageAppointModel massageAppoint){
         return new ResponseEntity<>(this.massageAppointService.saveMassageAppoint(massageAppoint),HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public @ResponseBody ResponseEntity<Optional<MassageAppointModel>> putOnsenAppoint(@PathVariable Long id ,@RequestBody MassageAppointModel massageAppoint){
+        return new ResponseEntity<>(this.massageAppointService.updateMassageAppoint(id,massageAppoint),HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

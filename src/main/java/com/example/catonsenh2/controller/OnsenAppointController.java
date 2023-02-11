@@ -1,5 +1,6 @@
 package com.example.catonsenh2.controller;
 
+import com.example.catonsenh2.models.MassageAppointModel;
 import com.example.catonsenh2.models.OnsenAppointModel;
 import com.example.catonsenh2.service.OnsenAppointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/onsen")
@@ -24,7 +26,7 @@ public class OnsenAppointController {
         this.onsenAppointService = onsenAppointService;
     }
 
-    @GetMapping("/{sDate}")
+    @GetMapping("/date/{sDate}")
     public @ResponseBody ResponseEntity<List<OnsenAppointModel>> getOnsenAppointByDate(@PathVariable String sDate){
         Instant iDate = Instant.parse(sDate);
         Date date = Date.from(iDate);
@@ -36,9 +38,19 @@ public class OnsenAppointController {
         return new ResponseEntity<>(this.onsenAppointService.findAllOnsenAppoint(),HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public @ResponseBody ResponseEntity<Optional<OnsenAppointModel>> getOneOnsenAppoint(@PathVariable Long id){
+        return new ResponseEntity<>(this.onsenAppointService.findOnsenAppointByID(id),HttpStatus.OK);
+    }
+
     @PostMapping("")
     public @ResponseBody ResponseEntity<OnsenAppointModel> postOnsenAppoint(@RequestBody OnsenAppointModel onsenAppoint){
         return new ResponseEntity<>(this.onsenAppointService.saveOnsenAppoint(onsenAppoint),HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public @ResponseBody ResponseEntity<Optional<OnsenAppointModel>> putOnsenAppoint(@PathVariable Long id , @RequestBody OnsenAppointModel onsenAppoint){
+        return new ResponseEntity<>(this.onsenAppointService.updateOnsenAppoint(id,onsenAppoint),HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
