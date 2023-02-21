@@ -2,12 +2,16 @@ package com.example.catonsenh2.controller;
 
 import com.example.catonsenh2.models.MassageAppointModel;
 import com.example.catonsenh2.models.OnsenAppointModel;
+import com.example.catonsenh2.service.ImageService;
 import com.example.catonsenh2.service.OnsenAppointService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.Instant;
 import java.util.Date;
@@ -21,6 +25,12 @@ public class OnsenAppointController {
 
     @Autowired
     private final OnsenAppointService onsenAppointService;
+
+    @Autowired
+    private ImageService imageService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     public OnsenAppointController(OnsenAppointService onsenAppointService) {
         this.onsenAppointService = onsenAppointService;
@@ -44,8 +54,15 @@ public class OnsenAppointController {
     }
 
     @PostMapping("")
-    public @ResponseBody ResponseEntity<OnsenAppointModel> postOnsenAppoint(@RequestBody OnsenAppointModel onsenAppoint){
-        return new ResponseEntity<>(this.onsenAppointService.saveOnsenAppoint(onsenAppoint),HttpStatus.CREATED);
+    public @ResponseBody ResponseEntity<OnsenAppointModel> postOnsenAppoint(@RequestParam("image") MultipartFile file, @RequestPart("onsen") String onsenAppointJson) throws IOException {
+        try {
+            OnsenAppointModel onsen = objectMapper.readValue(onsenAppointJson, OnsenAppointModel.class);
+            String image = this.imageService.uploadImage(file);
+            onsen.setImage(image);
+            return new ResponseEntity<>(this.onsenAppointService.saveOnsenAppoint(onsen),HttpStatus.CREATED);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     @PutMapping("/{id}")
