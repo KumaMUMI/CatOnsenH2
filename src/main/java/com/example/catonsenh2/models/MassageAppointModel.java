@@ -27,7 +27,7 @@ public class MassageAppointModel implements Serializable {
     private Date date;
 
     @Column(name = "paymentImage",nullable = false)
-    private String massImage;
+    private String massageImage;
 
     @OneToOne(cascade = CascadeType.ALL)
     private UserModel user;
