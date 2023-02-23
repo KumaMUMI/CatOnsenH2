@@ -7,15 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "ImageData")
+@Table(name = "MassageImageData")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ImageModel {
+public class MassageImageModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id",nullable = false)
     private Long id;
 
     private String name;

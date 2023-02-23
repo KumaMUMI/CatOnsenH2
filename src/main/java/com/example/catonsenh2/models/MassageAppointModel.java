@@ -23,14 +23,13 @@ public class MassageAppointModel implements Serializable {
     @Column(name = "Room",nullable = false)
     private int room;
 
-    @Column(name = "Payment",nullable = false)
-    private String payment;
-
     @Column(name = "Date",nullable = false)
     private Date date;
+
+    @Column(name = "paymentImage",nullable = false)
+    private String massImage;
 
     @OneToOne(cascade = CascadeType.ALL)
     private UserModel user;
 
-    private String image;
 }

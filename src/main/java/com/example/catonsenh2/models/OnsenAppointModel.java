@@ -24,14 +24,12 @@ public class OnsenAppointModel implements Serializable {
     @Column(name = "Room",nullable = false)
     private int room;
 
-    @Column(name = "Payment",nullable = false)
-    private String payment;
-
     @Column(name = "Date",nullable = false)
     private Date date;
 
     @OneToOne(cascade = CascadeType.ALL)
     private UserModel user;
 
+    @Column(name = "paymentImage",nullable = false)
     private String image;
 }

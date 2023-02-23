@@ -40,7 +40,6 @@ public class OnsenAppointService {
     public Optional<OnsenAppointModel> updateOnsenAppoint(Long id, OnsenAppointModel newAppointment){
         return this.onsenAppointRepository.findById(id).map(appointment -> {
             appointment.setRoom(newAppointment.getRoom());
-            appointment.setPayment(newAppointment.getPayment());
             appointment.setDate(newAppointment.getDate());
             return onsenAppointRepository.save(appointment);
         });

@@ -1,7 +1,7 @@
 package com.example.catonsenh2.controller;
 
 import com.example.catonsenh2.models.MassageAppointModel;
-import com.example.catonsenh2.service.ImageService;
+import com.example.catonsenh2.service.MassageImageService;
 import com.example.catonsenh2.service.MassageAppointService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class MassageAppointController {
     private final MassageAppointService massageAppointService;
 
     @Autowired
-    private ImageService imageService;
+    private MassageImageService massageImageService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -54,8 +54,8 @@ public class MassageAppointController {
     public @ResponseBody ResponseEntity<MassageAppointModel> postMassageAppoint(@RequestParam("image") MultipartFile file, @RequestPart("massage") String massageAppointJson) throws IOException {
         try {
             MassageAppointModel massage = objectMapper.readValue(massageAppointJson, MassageAppointModel.class);
-            String image = this.imageService.uploadImage(file);
-            massage.setImage(image);
+            String image = this.massageImageService.uploadMassageImage(file);
+            massage.setMassImage(image);
             return new ResponseEntity<>(this.massageAppointService.saveMassageAppoint(massage),HttpStatus.CREATED);
         }catch (Exception e){
             throw new RuntimeException(e);
@@ -69,6 +69,7 @@ public class MassageAppointController {
 
     @DeleteMapping("/{id}")
     public @ResponseBody ResponseEntity<String> deleteUser(@PathVariable Long id){
+        this.massageImageService.deleteByID(id);
         this.massageAppointService.deleteByID(id);
         return new ResponseEntity<>(String.format("%d has deleted.",id),HttpStatus.OK);
     }

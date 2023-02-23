@@ -41,7 +41,6 @@ public class MassageAppointService {
     public Optional<MassageAppointModel> updateMassageAppoint(Long id, MassageAppointModel newAppointment){
         return this.massageAppointRepository.findById(id).map(appointment -> {
             appointment.setRoom(newAppointment.getRoom());
-            appointment.setPayment(newAppointment.getPayment());
             appointment.setDate(newAppointment.getDate());
             return massageAppointRepository.save(appointment);
         });
