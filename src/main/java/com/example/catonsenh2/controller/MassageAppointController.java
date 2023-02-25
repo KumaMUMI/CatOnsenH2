@@ -55,7 +55,7 @@ public class MassageAppointController {
         try {
             MassageAppointModel massage = objectMapper.readValue(massageAppointJson, MassageAppointModel.class);
             String image = this.massageImageService.uploadMassageImage(file);
-            massage.setMassageImage(image);
+            massage.setMassImage(image);
             return new ResponseEntity<>(this.massageAppointService.saveMassageAppoint(massage),HttpStatus.CREATED);
         }catch (Exception e){
             throw new RuntimeException(e);
