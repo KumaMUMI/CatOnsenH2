@@ -31,5 +31,5 @@ public class OnsenAppointModel implements Serializable {
     private UserModel user;
 
     @Column(name = "paymentImage",nullable = false)
-    private String image;
+    private String onsenImage;
 }

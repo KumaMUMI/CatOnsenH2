@@ -1,7 +1,6 @@
 package com.example.catonsenh2.controller;
 
 import com.example.catonsenh2.models.OnsenAppointModel;
-import com.example.catonsenh2.service.MassageImageService;
 import com.example.catonsenh2.service.OnsenAppointService;
 import com.example.catonsenh2.service.OnsenImageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -57,7 +56,7 @@ public class OnsenAppointController {
         try {
             OnsenAppointModel onsen = objectMapper.readValue(onsenAppointJson, OnsenAppointModel.class);
             String image = this.onsenImageService.uploadOnsenImage(file);
-            onsen.setImage(image);
+            onsen.setOnsenImage(image);
             return new ResponseEntity<>(this.onsenAppointService.saveOnsenAppoint(onsen),HttpStatus.CREATED);
         }catch (Exception e){
             throw new RuntimeException(e);

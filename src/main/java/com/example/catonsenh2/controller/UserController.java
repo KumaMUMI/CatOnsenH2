@@ -47,6 +47,12 @@ public class UserController {
         return new ResponseEntity<>(this.userService.findUserByEmail(email),HttpStatus.OK);
     }
 
+
+    @GetMapping("/check/{email}/{tel}")
+    public @ResponseBody ResponseEntity<List<UserModel>> checkUser(@PathVariable String email,@PathVariable String tel){
+        return new ResponseEntity<>(this.userService.check(email,tel),HttpStatus.OK);
+    }
+
     @PostMapping("")
     public @ResponseBody ResponseEntity<UserModel> postUser(@RequestBody UserModel user){
         return new ResponseEntity<>(this.userService.saveUser(user),HttpStatus.CREATED);

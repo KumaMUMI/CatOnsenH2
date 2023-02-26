@@ -41,6 +41,11 @@ public class UserService {
         return userList;
     }
 
+    public List<UserModel> check(String email,String tel){
+        List<UserModel> userList = userRepository.findByEmailAndTel(email,tel);
+        return userList;
+    }
+
     public UserModel saveUser(UserModel user){
         return this.userRepository.save(user);
     }
