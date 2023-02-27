@@ -1,7 +1,11 @@
 package com.example.catonsenh2.controller;
 
+import com.example.catonsenh2.dtos.UserDto;
+import com.example.catonsenh2.dtos.convert.UserConvert;
 import com.example.catonsenh2.models.UserModel;
+import com.example.catonsenh2.request.CheckUser;
 import com.example.catonsenh2.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +21,9 @@ public class UserController {
 
     @Autowired
     private final UserService userService;
+
+    @Autowired
+    private UserConvert userConvert;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -48,11 +55,21 @@ public class UserController {
     }
 
 
-    @GetMapping("/check/{email}/{tel}")
-    public @ResponseBody ResponseEntity<List<UserModel>> checkUser(@PathVariable String email,@PathVariable String tel){
-        return new ResponseEntity<>(this.userService.check(email,tel),HttpStatus.OK);
+//    @GetMapping("/check/{email}/{tel}")
+//    public @ResponseBody ResponseEntity<List<UserModel>> checkUser(@PathVariable String email,@PathVariable String tel){
+//        return new ResponseEntity<>(this.userService.check(email,tel),HttpStatus.OK);
+//    }
+
+    @PostMapping("/check")
+    public @ResponseBody ResponseEntity<List<UserDto>> checkUser(@Valid @RequestBody CheckUser check) {
+        List<UserModel> user = this.userService.check(check.getEmail(),check.getTel());
+        return new ResponseEntity<>(this.userConvert.modelToDto(user), HttpStatus.OK);
     }
 
+//    @PostMapping("/check")
+//    public @ResponseBody ResponseEntity<List<UserModel>> checkUser(@Valid @RequestBody CheckUser check){
+//        return new ResponseEntity<>(this.userService.check(check.getEmail(),check.getTel()),HttpStatus.OK);
+//    }
     @PostMapping("")
     public @ResponseBody ResponseEntity<UserModel> postUser(@RequestBody UserModel user){
         return new ResponseEntity<>(this.userService.saveUser(user),HttpStatus.CREATED);
